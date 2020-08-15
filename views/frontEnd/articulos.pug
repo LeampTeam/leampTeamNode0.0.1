@@ -1,0 +1,66 @@
+extends ../shared/frontendlayout
+
+
+block content
+    .breadcrumb_section.bg_gray.page-title-mini
+        .container
+            .row.align-items-center
+                .col-lg-7.offset-lg-3
+                    .page-title
+                        h1 #{titulo}
+    .section
+        .container
+            .row.align-items-center
+                .col-lg-9.offset-lg-3
+                    .row.shop_container.list
+                        .col-md-12
+                            each val in productosVista
+                                .product
+                                    .product_img
+                                        a(href='/detalleProducto/'+val.id)
+                                            img(src='/admin/producto/getImageFile/'+val.img alt='product_img1')
+                                        .product_action_box
+                                            ul.list_none.pr_action_btn
+                                                li.add-to-cart
+                                                    a(href='/detalleProducto/'+val.id)
+                                                        i.icon-basket-loaded
+                                                        |  Agregar
+                                    .product_info
+                                        h6.product_title
+                                            a(href='/detalleProducto/'+val.id) #{val.name}
+                                        .product_price
+                                            span.price $#{val.price}
+                                            //- del $55.25
+                                            //- .on_sale
+                                            //-     span 35% Off
+                                        .rating_wrap
+                                            .rating
+                                                .product_rate(style='width:80%')
+                                            span.rating_num (21)
+                                        .pr_desc
+                                            p #{val.description}
+                                        ul.product-meta
+                                            li
+                                                | Codigo: 
+                                                a.code(href='#') #{val.code}
+                                            li
+                                                | Categoria: 
+                                                a(href='#') #{val.categoria}
+                                        .list_product_action_box
+                                            ul.list_none.pr_action_btn
+                                                li.add-to-cart
+                                                    a(href=href='/detalleProducto/'+val.id)
+                                                        i.icon-basket-loaded
+                                                        |  Agregar
+                    //- .row
+                    //-     .col-12
+                    //-         ul.pagination.mt-3.justify-content-center.pagination_style1
+                    //-             li.page-item.active
+                    //-                 a.page-link(href='#') 1
+                    //-             li.page-item
+                    //-                 a.page-link(href='#') 2
+                    //-             li.page-item
+                    //-                 a.page-link(href='#') 3
+                    //-             li.page-item
+                    //-                 a.page-link(href='#')
+                    //-                     i.linearicons-arrow-right

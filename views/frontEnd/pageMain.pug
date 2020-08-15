@@ -1,0 +1,227 @@
+extends ../shared/frontendlayout
+
+
+block content
+    .mt-4.staggered-animation-wrap
+        .custom-container
+            .row
+                .col-lg-7.offset-lg-3
+                    .banner_section.shop_el_slider
+                        #carouselExampleControls.carousel.slide.carousel-fade.light_arrow(data-ride='carousel')
+                            .carousel-inner
+                                each val,index in  productosVista
+                                    if(index==0)
+                                        .carousel-item.active.background_bg(data-img-src='/admin/producto/getImageFile/'+val.img)
+                                            .banner_slide_content.banner_content_inner
+                                                .col-lg-7.col-10
+                                                    .banner_content3.overflow-hidden
+                                                        h5.mb-3.staggered-animation.font-weight-light(data-animation='slideInLeft' data-animation-delay='0.5s') Obtene los Mejores productos
+                                                        h2.staggered-animation(data-animation='slideInLeft' data-animation-delay='1s') #{val.name}
+                                                        h4.staggered-animation.mb-4.product-price(data-animation='slideInLeft' data-animation-delay='1.2s')
+                                                            span.price $#{val.price}
+                                                        a.btn.btn-fill-out.btn-radius.staggered-animation.text-uppercase(href='/detalleProducto/'+val.id data-animation='slideInLeft' data-animation-delay='1.5s') Shop Now
+                                    else
+                                        .carousel-item.background_bg(data-img-src='/admin/producto/getImageFile/'+val.img)
+                                            .banner_slide_content.banner_content_inner
+                                                .col-lg-7.col-10
+                                                    .banner_content3.overflow-hidden
+                                                        h5.mb-3.staggered-animation.font-weight-light(data-animation='slideInLeft' data-animation-delay='0.5s') Obtene los Mejores productos
+                                                        h2.staggered-animation(data-animation='slideInLeft' data-animation-delay='1s') #{val.name}
+                                                        h4.staggered-animation.mb-4.product-price(data-animation='slideInLeft' data-animation-delay='1.2s')
+                                                            span.price $#{val.price}
+                                                        a.btn.btn-fill-out.btn-radius.staggered-animation.text-uppercase(href='/detalleProducto/'+val.id data-animation='slideInLeft' data-animation-delay='1.5s') Comprar Ahora
+                            ol.carousel-indicators.indicators_style3
+                                li.active(data-target='#carouselExampleControls' data-slide-to='0')
+                                li(data-target='#carouselExampleControls' data-slide-to='1')
+                                li(data-target='#carouselExampleControls' data-slide-to='2')
+                .col-lg-2.d-none.d-lg-block
+                    .shop_banner2.el_banner1
+                        a.hover_effect1(href='#')
+                            .el_title.text_white
+                                h6 iphone Collection
+                                span 25% off
+                            .el_img
+                                img(src='assets/images/shop_banner_img6.png' alt='shop_banner_img6')
+                    .shop_banner2.el_banner2
+                        a.hover_effect1(href='#')
+                            .el_title.text_white
+                                h6 MAC Computer
+                                span
+                                    u Shop Now
+                            .el_img
+                                img(src='assets/images/shop_banner_img7.png' alt='shop_banner_img7')
+    .section.small_pt.pb-0
+        .custom-container
+            .row
+                .col-xl-3.d-none.d-xl-block
+                    .sale-banner
+                        a.hover_effect1(href='#')
+                            img(src='assets/images/shop_banner_img6.jpg' alt='shop_banner_img6')
+                .col-xl-9
+                    .row
+                        .col-12
+                            .heading_tab_header
+                                .heading_s2
+                                    h4 Productos Mas Vendidos
+                                .tab-style2
+                                    button.navbar-toggler(type='button' data-toggle='collapse' data-target='#tabmenubar' aria-expanded='false')
+                                        span.ion-android-menu
+                                    ul#tabmenubar.nav.nav-tabs.justify-content-center.justify-content-md-end(role='tablist')
+                                        li.nav-item
+                                            a#arrival-tab.nav-link.active(data-toggle='tab' href='#arrival' role='tab' aria-controls='arrival' aria-selected='true') 
+                                                |Los mas vistos
+                                        //- li.nav-item
+                                        //-     a#sellers-tab.nav-link(data-toggle='tab' href='#sellers' role='tab' aria-controls='sellers' aria-selected='false') 
+                                        //-         |Best Sellers
+                                        //- li.nav-item
+                                        //-     a#featured-tab.nav-link(data-toggle='tab' href='#featured' role='tab' aria-controls='featured' aria-selected='false') 
+                                        //-         |Featured
+                                        //- li.nav-item
+                                        //-     a#special-tab.nav-link(data-toggle='tab' href='#special' role='tab' aria-controls='special' aria-selected='false')
+                                        //-         | Special Offer
+                    .row
+                        .col-12
+                            .tab_slider
+                                #arrival.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='arrival-tab')
+                                    .product_slider.carousel_slider.owl-carousel.owl-theme.dot_style1(data-loop='true' data-margin='20' data-responsive='{"0":{"items": "1"}, "481":{"items": "2"}, "768":{"items": "3"}, "991":{"items": "4"}}')
+                                        each val3 in produmasvendidos
+                                            .item
+                                                .product_wrap
+                                                    .product_img
+                                                        a(href='/detalleProducto/'+val3.id)
+                                                            img(src='/admin/producto/getImageFile/'+val3.img alt='el_img2')
+                                                            img.product_hover_img(src='/admin/producto/getImageFile/'+val3.img alt='el_hover_img2')
+                                                        .product_action_box
+                                                            ul.list_none.pr_action_btn
+                                                                li.add-to-cart
+                                                                    a(href='/detalleProducto/'+val3.id)
+                                                                        i.icon-basket-loaded
+                                                                        |  Add To Cart
+                                                    .product_info
+                                                        h6.product_title
+                                                            a(href='/detalleProducto/'+val3.id) #{val3.name}
+                                                        .product_price
+                                                            span.price $#{val3.price}
+                                                            //- .on_sale
+                                                            //-     span 25% Off
+                                                        .rating_wrap
+                                                            .rating
+                                                                .product_rate(style='width:68%')
+                                                            span.rating_num (15)
+                                                        .pr_desc
+                                                            p #{val3.description}
+                                                                
+                                //- #sellers.tab-pane.fade(role='tabpanel' aria-labelledby='sellers-tab')
+                                //-     .product_slider.carousel_slider.owl-carousel.owl-theme.dot_style1(data-loop='true' data-margin='20' data-responsive='{"0":{"items": "1"}, "481":{"items": "2"}, "768":{"items": "3"}, "991":{"items": "4"}}')
+                                //-         .item
+                                //-             .product_wrap
+                                //-                 .product_img
+                                //-                     a(href='shop-product-detail.html')
+                                //-                         img(src='assets/images/el_img2.jpg' alt='el_img2')
+                                //-                         img.product_hover_img(src='assets/images/el_hover_img2.jpg' alt='el_hover_img2')
+                                //-                     .product_action_box
+                                //-                         ul.list_none.pr_action_btn
+                                //-                             li.add-to-cart
+                                //-                                 a(href='#')
+                                //-                                     i.icon-basket-loaded
+                                //-                                     |  Add To Cart
+                                //-                             li
+                                //-                                 a.popup-ajax(href='//bestwebcreator.com/shopwise/demo/shop-compare.html')
+                                //-                                     i.icon-shuffle
+                                //-                             li
+                                //-                                 a.popup-ajax(href='//bestwebcreator.com/shopwise/demo/shop-quick-view.html')
+                                //-                                     i.icon-magnifier-add
+                                //-                             li
+                                //-                                 a(href='#')
+                                //-                                     i.icon-heart
+                                //-                 .product_info
+                                //-                     h6.product_title
+                                //-                         a(href='shop-product-detail.html') Smart Watch External
+                                //-                     .product_price
+                                //-                         span.price $55.00
+                                //-                         del $95.00
+                                //-                         .on_sale
+                                //-                             span 25% Off
+                                //-                     .rating_wrap
+                                //-                         .rating
+                                //-                             .product_rate(style='width:68%')
+                                //-                         span.rating_num (15)
+                                //-                     .pr_desc
+                                //-                         p
+                                //-                             | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim. Nullam id varius nunc id varius nunc.
+                                //- #featured.tab-pane.fade(role='tabpanel' aria-labelledby='featured-tab')
+                                //-     .product_slider.carousel_slider.owl-carousel.owl-theme.dot_style1(data-loop='true' data-margin='20' data-responsive='{"0":{"items": "1"}, "481":{"items": "2"}, "768":{"items": "3"}, "991":{"items": "4"}}')
+                                //-         .item
+                                //-             .product_wrap
+                                //-                 .product_img
+                                //-                     a(href='shop-product-detail.html')
+                                //-                         img(src='assets/images/el_img2.jpg' alt='el_img2')
+                                //-                         img.product_hover_img(src='assets/images/el_hover_img2.jpg' alt='el_hover_img2')
+                                //-                     .product_action_box
+                                //-                         ul.list_none.pr_action_btn
+                                //-                             li.add-to-cart
+                                //-                                 a(href='#')
+                                //-                                     i.icon-basket-loaded
+                                //-                                     |  Add To Cart
+                                //-                             li
+                                //-                                 a.popup-ajax(href='//bestwebcreator.com/shopwise/demo/shop-compare.html')
+                                //-                                     i.icon-shuffle
+                                //-                             li
+                                //-                                 a.popup-ajax(href='//bestwebcreator.com/shopwise/demo/shop-quick-view.html')
+                                //-                                     i.icon-magnifier-add
+                                //-                             li
+                                //-                                 a(href='#')
+                                //-                                     i.icon-heart
+                                //-                 .product_info
+                                //-                     h6.product_title
+                                //-                         a(href='shop-product-detail.html') Smart Watch External
+                                //-                     .product_price
+                                //-                         span.price $55.00
+                                //-                         del $95.00
+                                //-                         .on_sale
+                                //-                             span 25% Off
+                                //-                     .rating_wrap
+                                //-                         .rating
+                                //-                             .product_rate(style='width:68%')
+                                //-                         span.rating_num (15)
+                                //-                     .pr_desc
+                                //-                         p
+                                //-                             | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim. Nullam id varius nunc id varius nunc.
+                                //- #special.tab-pane.fade(role='tabpanel' aria-labelledby='special-tab')
+                                //-     .product_slider.carousel_slider.owl-carousel.owl-theme.dot_style1(data-loop='true' data-margin='20' data-responsive='{"0":{"items": "1"}, "481":{"items": "2"}, "768":{"items": "3"}, "991":{"items": "4"}}')
+                                //-         .item
+                                //-             .product_wrap
+                                //-                 .product_img
+                                //-                     a(href='shop-product-detail.html')
+                                //-                         img(src='assets/images/el_img2.jpg' alt='el_img2')
+                                //-                         img.product_hover_img(src='assets/images/el_hover_img2.jpg' alt='el_hover_img2')
+                                //-                     .product_action_box
+                                //-                         ul.list_none.pr_action_btn
+                                //-                             li.add-to-cart
+                                //-                                 a(href='#')
+                                //-                                     i.icon-basket-loaded
+                                //-                                     |  Add To Cart
+                                //-                             li
+                                //-                                 a.popup-ajax(href='//bestwebcreator.com/shopwise/demo/shop-compare.html')
+                                //-                                     i.icon-shuffle
+                                //-                             li
+                                //-                                 a.popup-ajax(href='//bestwebcreator.com/shopwise/demo/shop-quick-view.html')
+                                //-                                     i.icon-magnifier-add
+                                //-                             li
+                                //-                                 a(href='#')
+                                //-                                     i.icon-heart
+                                //-                 .product_info
+                                //-                     h6.product_title
+                                //-                         a(href='shop-product-detail.html') Smart Watch External
+                                //-                     .product_price
+                                //-                         span.price $55.00
+                                //-                         del $95.00
+                                //-                         .on_sale
+                                //-                             span 25% Off
+                                //-                     .rating_wrap
+                                //-                         .rating
+                                //-                             .product_rate(style='width:68%')
+                                //-                         span.rating_num (15)
+                                //-                     .pr_desc
+                                //-                         p
+                                //-                             | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim. Nullam id varius nunc id varius nunc.

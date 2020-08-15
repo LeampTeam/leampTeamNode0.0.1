@@ -1,0 +1,224 @@
+doctype html
+head
+  // Meta
+  meta(charset='utf-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(content='Anil z' name='author')
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  meta(name='description' content='Shopwise is Powerful features and You Can Use The Perfect Build this Template For Any eCommerce Website. The template is built for sell Fashion Products, Shoes, Bags, Cosmetics, Clothes, Sunglasses, Furniture, Kids Products, Electronics, Stationery Products and Sporting Goods.')
+  meta(name='keywords' content='ecommerce, electronics store, Fashion store, furniture store,  bootstrap 4, clean, minimal, modern, online store, responsive, retail, shopping, ecommerce store')
+  // SITE TITLE
+  title Leamp Team
+  // Favicon Icon
+  link(rel='shortcut icon' type='image/x-icon' href='/images/ICONO.png')
+  // Animation CSS
+  link(rel='stylesheet' href='/assets/css/animate.css')
+  // Latest Bootstrap min CSS
+  link(rel='stylesheet' href='/assets/bootstrap/css/bootstrap.min.css')
+  // Google Font
+  link(href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&display=swap' rel='stylesheet')
+  link(href='https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap' rel='stylesheet')
+  // Icon Font CSS
+  link(rel='stylesheet' href='/assets/css/all.min.css')
+  link(rel='stylesheet' href='/assets/css/ionicons.min.css')
+  link(rel='stylesheet' href='/assets/css/themify-icons.css')
+  link(rel='stylesheet' href='/assets/css/linearicons.css')
+  link(rel='stylesheet' href='/assets/css/flaticon.css')
+  link(rel='stylesheet' href='/assets/css/simple-line-icons.css')
+  // - owl carousel CSS
+  link(rel='stylesheet' href='/assets/owlcarousel/css/owl.carousel.min.css')
+  link(rel='stylesheet' href='/assets/owlcarousel/css/owl.theme.css')
+  link(rel='stylesheet' href='/assets/owlcarousel/css/owl.theme.default.min.css')
+  // Magnific Popup CSS
+  link(rel='stylesheet' href='/assets/css/magnific-popup.css')
+  link(rel="stylesheet" href="/assets/css/jquery-ui.css")
+  // Slick CSS
+  link(rel='stylesheet' href='/assets/css/slick.css')
+  link(rel='stylesheet' href='/assets/css/slick-theme.css')
+  // Style CSS
+  link(rel='stylesheet' href='/assets/css/style.css')
+  link(rel='stylesheet' href='/assets/css/responsive.css')
+  script(src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+  crossorigin="anonymous")
+body
+    // LOADER
+    .preloader
+        .lds-ellipsis
+            span
+            span
+            span
+    // END LOADER
+    // Home Popup Section
+    
+    // START HEADER
+    header.header_wrap.fixed-top.header_with_topbar
+        .top-header.light_skin.bg_dark.d-none.d-md-block
+            .custom-container
+                .row.align-items-center
+                    .col-lg-6.col-md-8
+                        .header_topbar_info
+                                span Envios a domicilio sin cargo
+                    .col-lg-6.col-md-4
+                        .d-flex.align-items-center.justify-content-center.justify-content-md-end
+                            .header_topbar_info
+                                .download_wrap
+                                    span.mr-3 Contactenos
+                                    ul.icon_list.text-center.text-lg-left
+                                        li
+                                            a(href='/contacto')
+                                                i.far.fa-envelope
+                                        li
+                                            a(href='/contacto')
+                                                i.fab.fa-whatsapp
+                                        li
+                                            a(href='/contacto')
+                                                i.fab.fa-facebook-square
+        .middle-header.dark_skin
+            .custom-container
+                .nav_block
+                    a.navbar-brand(href='/')
+                        img.logo_light(src='/images/logoCompleto.png' alt='logo' width=182 heigth=47)
+                        img.logo_dark(src='/images/logoCompleto.png' alt='logo' width=182 heigth=47)
+                    .product_search_form.rounded_input
+                        form(action='/buscarPorductos' method='post')
+                            .input-group
+                                .input-group-prepend
+                                    .custom_select
+                                        select.first_null(name='categoria')
+                                            option(value='') Categoria
+                                            each val,index in cateVista
+                                                option(value=val.id) #{val.name}
+                                input.form-control(placeholder='Buscar Producto...' required='' type='text' name='busqueda')
+                                button.search_btn2(type='submit')
+                                    i.fa.fa-search
+                    ul.navbar-nav.attr-nav.align-items-center
+                        li.dropdown.cart_dropdown
+                            a.nav-link.cart_trigger(href='#' data-toggle='dropdown')
+                                i.linearicons-bag2
+                                span.cart_count #{verChango.length}
+                                span.amount
+                                    span.currency_symbol $
+                                    | #{total}
+                            .cart_box.cart_right.dropdown-menu.dropdown-menu-right
+                                ul.cart_list
+                                    each item, index in verChango 
+                                        li
+                                            a.item_remove(href='/borrarItem/'+item.id)
+                                                i.ion-close
+                                            a(href='#')
+                                                img(src='/admin/producto/getImageFile/'+item.img alt='cart_thumb2' width=80 height=80)
+                                                | #{item.descripcion}
+                                            span.cart_quantity
+                                                | #{item.cantidad} X
+                                                span.cart_amount
+                                                    span.price_symbole $ 
+                                                | #{item.precio}
+                                .cart_footer
+                                    p.cart_total
+                                        strong Subtotal:
+                                        span.cart_price
+                                            span.price_symbole $
+                                            | #{total}
+                                p.cart_buttons
+                                    //- a.btn.btn-fill-line.view-cart(href='#') Ver Carro
+                                    a.btn.btn-fill-out.checkout(href='/carroCompra') Finalizar Compra
+        .bottom_header.dark_skin.main_menu_uppercase.border-top.border-bottom
+            .custom-container
+                .row
+                    .col-lg-3.col-md-4.col-sm-6.col-3
+                        .categories_wrap
+                            button.categories_btn(type='button' data-toggle='collapse' data-target='#navCatContent' aria-expanded='false')
+                                i.linearicons-menu
+                                span Categorias 
+                            #navCatContent.nav_cat.navbar.collapse
+                                ul
+                                    each val,index in cateVista
+                                        if(index < 10 )
+                                            li
+                                                a.dropdown-item.nav-link.nav_item(href='/nuestrosArticulos/'+val.id)
+                                                    img(src='/admin/categoria/getImageFile/'+val.img width=23 height=23)
+                                                    span #{val.name}
+                                        if(index >= 10)
+                                            li
+                                                ul.more_slide_open
+                                                    li
+                                                        a.dropdown-item.nav-link.nav_item(href='/nuestrosArticulos/'+val.id)
+                                                            img(src='/admin/categoria/getImageFile/'+val.img width=23 height=23)
+                                                            span #{val.name}
+                                .more_categories More Categories
+                    .col-lg-9.col-md-8.col-sm-6.col-9
+                        nav.navbar.navbar-expand-lg
+                            button.navbar-toggler.side_navbar_toggler(type='button' data-toggle='collapse' data-target='#navbarSidetoggle' aria-expanded='false')
+                                span.ion-android-menu
+                            .pr_search_icon
+                                a.nav-link.pr_search_trigger(href='javascript:void(0);')
+                                    i.linearicons-magnifier
+                            #navbarSidetoggle.collapse.navbar-collapse.mobile_side_menu
+                                ul.navbar-nav
+                                    li
+                                        a.nav-link.nav_item(href='/') Home
+                                    li
+                                        a.nav-link.nav_item(href='/nuestrosArticulos/1') Nuestros Productos
+                                    li
+                                        a.nav-link.nav_item(href='/contacto') Contactanos
+                            .contact_phone.contact_support
+                                i.linearicons-phone-wave
+                                span 11-3914-3140
+    .main_content
+        block content
+    .section.bg_default.small_pt.small_pb
+        .container
+            .row.align-items-center
+                .col-md-6
+                    .heading_s1.mb-md-0.heading_light
+                        h3 Queres recibir ofertas
+                .col-md-6
+                    .newsletter_form
+                        form
+                            input.form-control.rounded-0(type='text' required='' placeholder='Ingresa tu email')
+                            button.btn.btn-dark.rounded-0(type='submit' name='submit' value='Submit') Enviar
+    footer.footer_dark
+        //- .footer_top
+        //-     .container
+        .bottom_footer.border-top-tran
+            .container
+                .row
+                    .col-md-6
+                        p.mb-md-0.text-center.text-md-left &copy; Creado por Zaraza
+                    .col-md-6
+                       
+    // END FOOTER
+    //- a.scrollup(href='#' style='display: none;')
+    //-     i.ion-ios-arrow-up
+    
+    // Latest jQuery
+    script(src='/assets/js/jquery-1.12.4.min.js')
+    // popper min js
+    script(src='/assets/js/popper.min.js')
+    // Latest compiled and minified Bootstrap
+    script(src='/assets/bootstrap/js/bootstrap.min.js')
+    // owl-carousel min js
+    script(src='/assets/owlcarousel/js/owl.carousel.min.js')
+    // magnific-popup min js
+    script(src='/assets/js/magnific-popup.min.js')
+    // waypoints min js
+    script(src='/assets/js/waypoints.min.js')
+    // parallax js
+    script(src='/assets/js/parallax.js')
+    // countdown js
+    script(src='/assets/js/jquery.countdown.min.js')
+    // imagesloaded js
+    script(src='/assets/js/imagesloaded.pkgd.min.js')
+    // isotope min js
+    script(src='/assets/js/isotope.min.js')
+    // jquery.dd.min js
+    script(src='/assets/js/jquery.dd.min.js')
+    // slick js
+    script(src='/assets/js/slick.min.js')
+    script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyD7TypZFTl4Z3gVtikNOdGSfNTpnmq-ahQ&callback=initMap')
+    // elevatezoom js
+    script(src='/assets/js/jquery.elevatezoom.js')
+    // scripts js
+    script(src='/assets/js/scripts.js')
+

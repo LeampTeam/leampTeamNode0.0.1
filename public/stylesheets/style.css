@@ -1,8 +1,43 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
+.upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    
+    }
+    /* ESTILO DEL INPUT*/
+    .upload-btn-wrapper input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    
+    }
+    /* ESTILO DEL BOTÓN */
+    .boton-standar-rw{
+    
+    background-color: white;
+    color:  #404e67;
+    border: 0;
+    font-weight: bold;
+    letter-spacing: 1px;
+    line-height: 15px;
+   
+   
+    
+    }
+    /* ESTILO DEL BOTÓN CON HOVER DE MOUSE */
+    .preloader {
+        background-color: #fff;
+        padding:20%;
+        bottom: 0;
+        height: 100%;
+        left: 0;
+        position: fixed;
+        right: 0;
+        top: 0;
+        width: 100%;
+        z-index: 9999;
+    }
 
-a {
-  color: #00B7FF;
-}
+   

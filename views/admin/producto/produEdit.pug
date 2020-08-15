@@ -1,0 +1,146 @@
+
+extends ../../shared/adminlayout
+block content
+    .card
+        .card-header
+            h4#basic-layout-square-controls.card-title Carga de Producto
+            .heading-elements
+                a.btn.btn-warning.mr-1(type='button' href='/admin/producto/grilla')
+                        i.feather.icon-arrow-left
+                        |  Volver
+        .card-content.collapse.show
+            .card-body
+                form.form#formProdu(action = "/admin/producto/edit", method = "POST" novalidate)
+                    input#exampleInputEmail1.form-control(type='hidden' aria-describedby='emailHelp' placeholder='Enter email' name='id' value=producto!=''?producto._id:'')
+                    .form-body
+                        .row
+                            .col-md-12
+                                .form-group
+                                    label.font-medium-2.text-bold-600.ml-1(for='selectCategoria') Categoria
+                                    .controls
+                                        select#selectCategoria.select2.form-control(name='categoria' required)
+                                                option(value="") Selecione una categoria
+                                                    each val in categorias
+                                                        if (val.id === producto.categoria.id)
+                                                            option(value=val._id  selected="selected") #{val.name}
+                                                        else
+                                                            option(value=val._id  ) #{val.name}
+                        .row
+                            .col-md-6
+                                if(producto.checkFragancia)
+                                    .form-group
+                                        input#switchFragancia.switchery(type='checkbox' data-size='xs' checked name="checkFragancia")
+                                        label.font-medium-2.text-bold-600.ml-1.mt-1(for='switchFragancia') Fragancia
+                                else
+                                     .form-group
+                                        input#switchFragancia.switchery(type='checkbox' data-size='xs'  name="checkFragancia")
+                                        label.font-medium-2.text-bold-600.ml-1.mt-1(for='switchFragancia') Fragancia
+                                .form-group
+                                    select#selectFragancia.select2.form-control(name='fragancia')
+                                        option(value=0) Selecione una fragancia
+                                            each val in fragancias
+                                                if (val.id === producto.fragancia.id)
+                                                    option(value=val._id  selected="selected") #{val.name}
+                                                else
+                                                    option(value=val._id  ) #{val.name}
+                            .col-md-3
+                                if(producto.checkTamano)
+                                    .form-group
+                                        input#switchTamano.switchery(type='checkbox' data-size='xs' checked name="checkTamano")
+                                        label.font-medium-2.text-bold-600.ml-1.mt-1(for='switchTamano') Tipo Tamaño
+                                else
+                                    .form-group
+                                        input#switchTamano.switchery(type='checkbox' data-size='xs'  name="checkTamano")
+                                        label.font-medium-2.text-bold-600.ml-1.mt-1(for='switchTamano') Tipo Tamaño
+                                .form-group
+                                    select#selectTamano.select2.form-control(name='tamano')
+                                        option(value=0) Selecione una tamaño
+                                            each val in tamanos
+                                                if (val.id === producto.tamano.id)
+                                                    option(value=val._id  selected="selected") #{val.name}
+                                                else
+                                                    option(value=val._id  ) #{val.name}
+                            .col-md-3
+                                if(producto.checkPresentacion)
+                                    .form-group
+                                        input#switchPresentacion.switchery(type='checkbox' data-size='xs' checked name="checkPresentacion")
+                                        label.font-medium-2.text-bold-600.ml-1.mt-1(for='switchPresentacion') Tipo Presentacion
+                                else
+                                    .form-group
+                                        input#switchPresentacion.switchery(type='checkbox' data-size='xs' name="checkPresentacion")
+                                        label.font-medium-2.text-bold-600.ml-1.mt-1(for='switchPresentacion') Tipo Presentacion
+                                .form-group
+                                    select#selectPresentacion.select2.form-control(name='presentacion')
+                                        option(value=0) Selecione una presentacion
+                                            each val in presentaciones
+                                                if (val.id === producto.presentacion.id)
+                                                    option(value=val._id  selected="selected") #{val.name}
+                                                else
+                                                    option(value=val._id  ) #{val.name}
+                        .row
+                            .col-md-6
+                                .form-group
+                                    label(for='nombre') Nombre
+                                    .controls.position-relative.has-icon-left
+                                        input#nombre.form-control(type='text' placeholder='Nombre' name='name' required data-validation-required-message="Este campo es requerido" value= producto!=''?producto.name:'')
+                                        .form-control-position
+                                            i.fa.fa-italic
+                            .col-md-3
+                                .form-group
+                                    label(for='stock') Stock
+                                    .controls.position-relative.has-icon-left
+                                        input#codstockigo.form-control(type='number' placeholder='Stock' name='stock' required data-validation-required-message="Este campo es requerido" value= producto!=''?producto.stock:'')
+                                        .form-control-position
+                                            i.fa.fa-th
+                            .col-md-3
+                                .form-group
+                                    label(for='codigo') Codigo
+                                    .controls.position-relative.has-icon-left
+                                        input#codigo.form-control(type='text' placeholder='Codigo' name='code' required data-validation-required-message="Este campo es requerido" value= producto!=''?producto.code:'')
+                                        .form-control-position
+                                            i.fa.fa-barcode
+                        //- .form-group
+                        //-     label(for='timesheetinput3') Date
+                        //-     .position-relative.has-icon-left
+                        //-     input#timesheetinput3.form-control(type='date' name='date')
+                        //-     .form-control-position
+                        //-         i.feather.icon-message-square
+                        .row
+                            .col-md-6
+                                .form-group
+                                    .controls
+                                        label Precio Bruto
+                                        .input-group.mt-0
+                                            .input-group-prepend
+                                                span.input-group-text $
+                                            input.form-control(type='text' placeholder='Precio Bruto' required data-validation-required-message="Este campo es requerido" aria-label='Amount (to the nearest dollar)' name='priceMayor' value= producto!=''?producto.priceMayor:'')
+                                            .input-group-append
+                                                span.input-group-text .00
+                            .col-md-3
+                                .form-group
+                                    .controls
+                                        label Porcentaje
+                                        .input-group.mt-0
+                                            .input-group-prepend
+                                                span.input-group-text %
+                                            input.form-control(type='text' placeholder='Porcentaje' required data-validation-required-message="Este campo es requerido" aria-label='Amount (to the nearest dollar)' name='porcentaje' value= producto!=''?producto.porcentaje:'')
+                            .col-md-3
+                                .form-group
+                                    label Precio de Lista
+                                    .input-group.mt-0
+                                        .input-group-prepend
+                                            span.input-group-text $
+                                        input.form-control(type='text' placeholder='Precio de Lista' aria-label='Amount (to the nearest dollar)' disabled name='price' value= producto!=''?producto.price:'')
+                                        .input-group-append
+                                            span.input-group-text .00
+                        
+                        .row
+                            .col-md-12
+                                fieldset.form-group
+                                    label(for='descripcion') Descripcion
+                                    textarea(name="description" class="form-control"  rows="5") #{producto!=''?producto.description:''}
+                    .form-actions.left
+                        button.btn.btn-primary(type='submit')
+                            i.fa.fa-check-square-o
+                            |  Guardar
+    script(src="/javascripts/producto/producto.js")

@@ -1,0 +1,107 @@
+extends ../shared/frontendlayout
+
+
+block content
+    .breadcrumb_section.bg_gray.page-title-mini
+        .container
+            .row.align-items-center
+                .col-lg-9.offset-lg-3
+                        .page-title
+                            h1 Detalle del Producto
+    .container.mb-3
+        .row.align-items-center
+            .col-lg-9.offset-lg-3
+                .row
+                    .col-lg-6.col-md-6.mb-4.mb-md-0
+                        .product-image
+                            .product_img_box
+                                img(src='/admin/producto/getImageFile/'+produ.img  height='400' alt='product_img1')                       
+                    .col-lg-6.col-md-6
+                        .pr_detail
+                            .product_description
+                                h4.product_title  #{produ.name}                            
+                                .product_price
+                                    span.price $#{produ.price}
+                                    //- del $55.25
+                                    //- .on_sale
+                                    //-     span 35% Off
+                                .rating_wrap
+                                    .rating
+                                        .product_rate(style='width:80%')
+                                    span.rating_num (21)
+                                .pr_desc
+                                    p.descrip #{produ.description}
+                                .product_sort_info 
+                                if progroupFrag
+                                    .pr_switch_wrap
+                                        .mr-3
+                                            label(for='fragancia') Fragancia
+                                            select.select.form-control.form-control-sm(id='fragancia')
+                                                option(value='') Seleccione Fragancia
+                                                each frag in progroupFrag
+                                                    if (frag[0].fragancia.id === produ.fragancia.id)
+                                                        option(value=frag[0].fragancia.id selected="selected") #{frag[0].fragancia.name} 
+                                                    else
+                                                        option(value=frag[0].fragancia.id ) #{frag[0].fragancia.name}
+                                if progroupTam
+                                    .pr_switch_wrap
+                                        .mr-3
+                                            label(for='tamano') Tamaño
+                                            select.select.form-control.form-control-sm(id='tamano')
+                                                option(value='') Seleccione Tamaño
+                                                each tama in progroupTam
+                                                    if (tama[0].tamano.id === produ.tamano.id)
+                                                        option(value=tama[0].tamano.id selected="selected") #{tama[0].tamano.name} 
+                                                    else
+                                                        option(value=tama[0].tamano.id) #{tama[0].tamano.name}
+                                if progroupLitr
+                                    .pr_switch_wrap
+                                        .mr-3
+                                            label(for='presentacion') Presentacion
+                                            select.select.form-control.form-control-sm(id='presentacion')
+                                                option(value='') Seleccione Presentacion
+                                                each prese in progroupLitr
+                                                    if (prese[0].presentacion.id === produ.presentacion.id)
+                                                        option(value=prese[0].presentacion.id selected="selected") #{prese[0].presentacion.name} 
+                                                    else
+                                                        option(value=prese[0].presentacion.id) #{prese[0].presentacion.name}
+                        hr
+                        .cart_extra
+                            .cart-product-quantity
+                                .quantity
+                                    input.minus(type='button' value='-')
+                                    input.qty(type='text' name='quantity' value='1' title='Qty' size='4')
+                                    input.plus(type='button' value='+')
+                        .cart_btn
+                            button.btn.btn-fill-out.btn-addtocart(type='button' id='buttonCompra' name=produ.id)
+                                i.icon-basket-loaded
+                                |  Agregar al Carro
+                        hr
+                        ul.product-meta
+                            li
+                                | Codigo: 
+                                a.code #{produ.code}
+                            li
+                                | Categoria: 
+                                input(type="hidden" id="categoria" name="categoria" value=produ.categoriaid)
+                                a(href='/nuestrosArticulos/'+produ.categoriaid) #{produ.categoria}
+                
+                //- .product_share
+                //-     span Share:
+                //-     ul.social_icons
+                //-         li
+                //-             a(href='#')
+                //-                 i.ion-social-facebook
+                //-         li
+                //-             a(href='#')
+                //-                 i.ion-social-twitter
+                //-         li
+                //-             a(href='#')
+                //-                 i.ion-social-googleplus
+                //-         li
+                //-             a(href='#')
+                //-                 i.ion-social-youtube-outline
+                //-         li
+                //-             a(href='#')
+                //-                 i.ion-social-instagram-outline
+    script(src="/javascripts/frontEnd/articulos.js")

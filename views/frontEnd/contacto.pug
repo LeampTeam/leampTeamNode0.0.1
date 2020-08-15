@@ -1,0 +1,62 @@
+extends ../shared/frontendlayout
+
+
+block content
+    .breadcrumb_section.bg_gray.page-title-mini
+        .container
+            .row.align-items-center
+                .col-lg-9.offset-lg-3
+                    .row.align-items-center
+                        .col-md-6
+                                .page-title
+                                    h1 Contactanos
+                        .col-md-6
+                    .section
+                        .row
+                            .col-xl-4.col-md-6
+                                .contact_wrap.contact_style3
+                                    .contact_icon
+                                        i.fab.fa-facebook-f
+                                    .contact_text
+                                        span Address
+                                        p 123 Street, Old Trafford, London, UK
+                            .col-xl-4.col-md-6
+                                .contact_wrap.contact_style3
+                                    .contact_icon
+                                        i.linearicons-envelope-open
+                                    .contact_text
+                                        span Email
+                                        a(href='mailto:limpteamventas@gmail.com') limpteamventas@gmail.com
+                            .col-xl-4.col-md-6
+                                .contact_wrap.contact_style3
+                                    .contact_icon
+                                        i.linearicons-tablet2
+                                    .contact_text
+                                        span Telefono
+                                        p 1539143140
+        .container
+            .row
+                .col-lg-6
+                    .heading_s1
+                        h2 Dejanos tu Sujerencia
+                        p.leads
+                            | Tu opinion nos interesa, escribinos. De esta manera podemos mejorar nuestro servicio
+                    .field_form
+                        form(method='post' name='enq' action='/enviarMailSugerencia')
+                            .row
+                                .form-group.col-md-6
+                                    input#first-name.form-control(required='' placeholder='Ingresa tu nombre *' name='name' type='text')
+                                .form-group.col-md-6
+                                    input#email.form-control(required='' placeholder='Ingresa tu Email *' name='email' type='email')
+                                .form-group.col-md-6
+                                    input#phone.form-control(required='' placeholder=' Ingresa tu Telefono' name='phone')
+                                .form-group.col-md-6
+                                    input#subject.form-control(placeholder='Ingresa el Motivo' name='subject')
+                                .form-group.col-md-12
+                                    textarea#description.form-control(required='' placeholder='Monsaje' name='message' rows='4')
+                                .col-md-12
+                                    button#submitButton.btn.btn-fill-out(type='submit' title='Submit Your Message!' name='submit' value='Submit') Enviar Mensaje
+                                .col-md-12
+                                    #alert-msg.alert-msg.text-center
+                .col-lg-6.pt-2.pt-lg-0.mt-4.mt-lg-0
+                    #map.contact_map2(data-zoom='12' data-latitude='-34.599019' data-longitude='-58.5474668' data-icon='assets/images/marker.png')

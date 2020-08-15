@@ -1,0 +1,28 @@
+extends ../shared/frontendlayout
+
+
+block content
+    .breadcrumb_section.bg_gray.page-title-mini
+        .container
+            .row.align-items-center
+                .col-lg-7.offset-lg-3
+                    .page-title
+    .mt-4.staggered-animation-wrap
+        .custom-container
+            .row
+                .col-lg-7.offset-lg-3
+                    .card-header(class="text-center")
+                        img(src='/images/limp.png', alt="", width=300 heigth=150)
+                    .card.text-center
+                        .card-body
+                            h3.card-title #{mensaje}
+                            p.card-text Vea todas nuestras ofertas y productos apretando el siguiente boton
+                            a.btn.btn-info(href='/nuestrosArticulos/1')  Ir a Comprar
+                        .card-footer.text-muted
+                            | Gracias!!
+            
+
+
+
+
+

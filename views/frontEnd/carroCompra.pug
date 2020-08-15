@@ -1,0 +1,74 @@
+extends ../shared/frontendlayout
+
+
+block content
+    .mt-4.staggered-animation-wrap.section
+        .custom-container
+            .row
+                .col-lg-9.offset-lg-3
+                    .container
+                        .row
+                            .col-12
+                                .table-responsive.shop_cart_table
+                                    table.table
+                                        thead
+                                            tr
+                                                th.product-thumbnail &nbsp;
+                                                th.product-name Producto
+                                                th.product-price Precio
+                                                th.product-quantity Cantidad
+                                                th.product-subtotal Total
+                                                th.product-remove Eliminar
+                                        tbody
+                                            each val in verChango
+                                                tr
+                                                    td.product-thumbnail
+                                                        a(href='#')
+                                                            img(src='/admin/producto/getImageFile/'+val.img alt='product3')
+                                                    td.product-name(data-title='Producto')
+                                                        a(href='#') #{val.descripcion}
+                                                    td.product-price(data-title='Precio') #{val.precio}
+                                                    td.product-quantity(data-title='Cantidad')
+                                                        .quantity
+                                                            input.minus(type='button' value='-')
+                                                            input.qty(type='text' name='quantity' value=val.cantidad title='Qty' size='4')
+                                                            input.plus(type='button' value='+')
+                                                    td.product-subtotal(data-title='Total') $#{val.cantidadXproducto}
+                                                    td.product-remove(data-title='Eliminar')
+                                                        a(href='/borrarItem/'+val.id)
+                                                            i.ti-close
+                                        tfoot
+                                            tr
+                                                td.px-0(colspan='6')
+                                                    .row.no-gutters.align-items-center
+                                                        .col-lg-6.col-md-6.mb-3.mb-md-0
+                                                            .coupon.field_form.input-group
+                                                                input.form-control.form-control-sm(type='text' value='' placeholder='Colocar codigo ')
+                                                                .input-group-append
+                                                                    button.btn.btn-fill-out.btn-sm(type='submit') Canjear cupon
+                                                        .col-lg-6.col-md-6.text-left.text-md-right
+                                                            a.btn.btn-line-fill.btn-sm(href='/nuestrosArticulos/1') Seguir Comprando
+                        .row
+                            .col-12
+                                .medium_divider
+                                .divider.center_icon
+                                    i.ti-shopping-cart-full
+                                .medium_divider
+                            .col-md-12
+                                .border.p-3.p-md-4
+                                    .heading_s1.mb-3
+                                        h6 Total Compra
+                                    .table-responsive
+                                        table.table
+                                            tbody
+                                                tr
+                                                    td.cart_total_label Compra Subtotal
+                                                    td.cart_total_amount $#{total}
+                                                tr
+                                                    td.cart_total_label Envio
+                                                    td.cart_total_amount Envio gratis
+                                                tr
+                                                    td.cart_total_label Total
+                                                    td.cart_total_amount
+                                                        strong $#{total}
+                                a.btn.btn-fill-out(href='#') Confirmar Compra

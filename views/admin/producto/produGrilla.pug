@@ -1,0 +1,39 @@
+extends ../../shared/adminlayout
+
+block content
+  #cargaImagen.modal.fade(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
+    .modal-dialog
+      .modal-content
+        .modal-header
+          h4 Carga Imagen
+        .modal-body
+          .row
+            .col-12
+              form#upload-widget.dropzone(method='post' action='/admin/producto/upload')
+                input#productId(type='hidden' name='productId')
+                .fallback
+                  input(name='file' type='file')
+  .card
+    .card-header
+        h4#heading-icon.card-title Lista de Productos
+        .heading-elements
+                  ul.list-inline.mb-0
+                    li
+                      a.btn.btn-info(type='button' href='/admin/producto/create')
+                        i.feather.icon-plus-square
+                        | Crear Producto
+    .card-body
+      table.table.table-striped.table-bordered.server-side
+        thead
+            tr
+              th Id
+              th Codigo
+              th Categoria
+              th Precio
+              th Stock
+              th Acciones  
+  //- script(src='https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js')
+  script(src='../../../app-assets/vendors/js/extensions/dropzone.min.js')
+  script(src='../../../app-assets/vendors/js/ui/prism.min.js')
+  script(src="/javascripts/producto/datatableProducto.js")
+  

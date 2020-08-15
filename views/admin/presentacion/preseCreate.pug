@@ -1,0 +1,47 @@
+extends ../../shared/adminlayout
+
+block content
+    .card
+        .card-header
+            h4#basic-layout-square-controls.card-title Carga de Presentacion
+            .heading-elements
+                a.btn.btn-warning.mr-1(type='button' href='/admin/presentacion/grilla')
+                        i.feather.icon-arrow-left
+                        |  Volver
+        .card-content.collapse.show
+            .card-body
+                form.form(action = "/admin/presentacion/create", method = "POST")
+                    .form-body
+                        .row
+                            .col-md-6
+                                .form-group
+                                    label(for='nombre') Nombre
+                                    input#nombre.form-control.square(type='text' placeholder='Nombre' name='name' value= presentacion!=''?presentacion.name:'')
+                            .col-md-6
+                                .form-group
+                                    label(for='code') Codigo
+                                    input#code.form-control.square(type='text' placeholder='Nombre' name='code' value= presentacion!=''?presentacion.code:'')
+                    //- .form-group
+                    //-     label(for='donationinput2') Email
+                    //-     input#donationinput2.form-control.square(type='email' placeholder='email' name='email')
+                    //- .form-group
+                    //-     label(for='donationinput3') Contact Number
+                    //-     input#donationinput3.form-control.square(type='tel' name='contact')
+                    //- .form-group
+                    //-     label(for='donationinput4') Dontaion Type
+                    //-     input#donationinput4.form-control.square(type='text' placeholder='type of donation' name='donationtype')
+                    //- .form-group
+                    //-     label Amount
+                    //-     .input-group.mt-0
+                    //-     .input-group-prepend
+                    //-         span.input-group-text $
+                    //-     input.form-control.square(type='text' placeholder='amount' aria-label='Amount (to the nearest dollar)' name='amount')
+                    //-     .input-group-append
+                    //-         span.input-group-text .00
+                    //- .form-group
+                    //-     label(for='donationinput7') Comments
+                    //-     textarea#donationinput7.form-control.square(rows='5' name='comments' placeholder='comments')
+                    .form-actions.left
+                        button.btn.btn-primary(type='submit')
+                            i.fa.fa-check-square-o
+                            |  Guardar

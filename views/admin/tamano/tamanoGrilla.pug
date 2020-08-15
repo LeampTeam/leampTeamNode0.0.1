@@ -1,0 +1,22 @@
+extends ../../shared/adminlayout
+
+
+block content
+  .card
+    .card-header
+        h4#heading-icon.card-title Lista de Tamaños
+        .heading-elements
+                  ul.list-inline.mb-0
+                    li
+                      a.btn.btn-info(type='button' href='/admin/tamano/create')
+                        i.feather.icon-plus-square
+                        | Crear Tamaño
+    .card-body
+      table.table.table-striped.table-bordered.server-side
+        thead
+          tr
+            th Id
+            th Nombre
+            th Codigo
+            th Acciones  
+  script(src="/javascripts/tamano/datatableTamano.js")

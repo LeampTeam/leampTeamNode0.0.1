@@ -1,0 +1,35 @@
+extends ../../shared/loginregisterlayout
+
+block content
+  section.row.flexbox-container
+    .col-12.d-flex.align-items-center.justify-content-center
+      .col-lg-4.col-md-8.col-10.box-shadow-2.p-0
+        .card.border-grey.border-lighten-3.m-0
+          .card-header.border-0
+            .card-title.text-center
+              .p-1
+                img(src='/images/limp.png' alt='branding logo' width=150 heigth=100)
+            h6.card-subtitle.line-on-side.text-muted.text-center.font-small-3.pt-2
+              span
+                | Login 
+          .card-content
+            .card-body
+              form.form-horizontal.form-simple(action = "/admin/users/login", method = "POST" novalidate='')
+                fieldset.form-group.position-relative.has-icon-left.mb-0
+                  input#user-name.form-control.form-control-lg(type='text' name='email' placeholder='Tu email' required='')
+                  .form-control-position
+                    i.feather.icon-user
+                fieldset.form-group.position-relative.has-icon-left
+                  input#user-password.form-control.form-control-lg(type='password' name='pass' placeholder='Ingresar Password' required='')
+                  .form-control-position
+                    i.fa.fa-key
+                button.btn.btn-primary.btn-lg.btn-block(type='submit')
+                  i.feather.icon-unlock
+                  |  Login
+          .card-footer
+            div
+              p.float-sm-left.text-center.m-0
+                a.card-link(href='recover-password.html') Recuperar Contraseña
+              p.float-sm-right.text-center.m-0
+                | Sos nuevo? 
+                a.card-link(href="/admin/users/register") Registrate

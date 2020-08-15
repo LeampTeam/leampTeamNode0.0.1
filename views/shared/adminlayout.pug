@@ -1,0 +1,190 @@
+doctype html
+// BEGIN: Head
+head
+  meta(http-equiv='Content-Type' content='text/html; charset=UTF-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui')
+  meta(name='description' content='Stack admin is super flexible, powerful, clean & modern responsive bootstrap 4 admin template with unlimited possibilities.')
+  meta(name='keywords' content='admin template, stack admin template, dashboard template, flat admin template, responsive admin template, web app')
+  meta(name='author' content='PIXINVENT')
+  title LimpTeam
+  link(rel='apple-touch-icon' href='../../../app-assets/images/ico/apple-icon-120.png')
+  link(rel='shortcut icon' type='image/x-icon' href='/images/limp.png')
+  link(href='https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i%7COpen+Sans:300,300i,400,400i,600,600i,700,700i' rel='stylesheet')
+  // BEGIN: Vendor CSS
+  link(rel='stylesheet' type='text/css' href='../../../app-assets/vendors/css/vendors.min.css')
+  link(rel='stylesheet' type='text/css' href='../../../app-assets/vendors/css/tables/datatable/datatables.min.css')
+  link(rel='stylesheet' type='text/css' href='../../../app-assets/vendors/css/ui/prism.min.css')
+  link(rel='stylesheet' type='text/css' href='../../../app-assets/vendors/css/file-uploaders/dropzone.min.css')
+  link(rel='stylesheet' type='text/css' href='../../../app-assets/vendors/css/forms/quill/katex.min.css')
+  link(rel='stylesheet' type='text/css' href='../../../app-assets/vendors/css/forms/quill/monokai-sublime.min.css')
+  link(rel='stylesheet' type='text/css' href='../../../app-assets/vendors/css/forms/quill/quill.snow.css')
+  link(rel='stylesheet' type='text/css' href='../../../app-assets/vendors/css/forms/quill/quill.bubble.css')
+  link(rel='stylesheet' type='text/css' href='../../../app-assets/vendors/css/forms/toggle/switchery.min.css')
+  link(rel='stylesheet' type='text/css' href='../../../app-assets/vendors/css/forms/selects/select2.min.css')
+  link(rel='stylesheet' type='text/css' href='../../../app-assets/css/plugins/forms/validation/form-validation.css')
+
+
+  // END: Vendor CSS
+  // BEGIN: Theme CSS
+  link(rel='stylesheet', href='/stylesheets/style.css')
+  link(rel='stylesheet' type='text/css' href='../../../app-assets/css/bootstrap.css')
+  link(rel='stylesheet' type='text/css' href='../../../app-assets/css/bootstrap-extended.css')
+  link(rel='stylesheet' type='text/css' href='../../../app-assets/css/colors.css')
+  link(rel='stylesheet' type='text/css' href='../../../app-assets/css/components.css')
+  // END: Theme CSS
+  // BEGIN: Page CSS
+  link(rel='stylesheet' type='text/css' href='../../../app-assets/css/core/menu/menu-types/vertical-menu.css')
+  link(rel='stylesheet' type='text/css' href='../../../app-assets/css/core/colors/palette-gradient.css')
+  link(rel='stylesheet' type='text/css' href='../../../app-assets/css/plugins/file-uploaders/dropzone.css')
+  link(rel='stylesheet' type='text/css' href='../../../app-assets/css/plugins/forms/switch.css')
+
+  // END: Page CSS
+  // BEGIN: Custom CSS
+  //- link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css')
+
+  link(rel='stylesheet' type='text/css' href='../../../app-assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css')
+  script(src='https://code.jquery.com/jquery-3.4.1.min.js' integrity='sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=' crossorigin='anonymous')
+  // END: Custom CSS
+  
+// END: Head
+// BEGIN: Body
+body.vertical-layout.vertical-menu.fixed-navbar(class="2-columns" data-open="click" data-menu="vertical-menu" data-col="2-columns")
+  .preloader.text-center
+    .spinner-border.text-primary
+      span.sr-only 
+        | Loading...
+  // BEGIN: Header
+  nav.header-navbar.navbar-expand-md.navbar.navbar-with-menu.fixed-top.navbar-semi-light.bg-gradient-x-grey-blue
+    .navbar-wrapper
+      .navbar-header
+        ul.nav.navbar-nav.flex-row
+          li.nav-item.mobile-menu.d-md-none.mr-auto
+            a.nav-link.nav-menu-main.menu-toggle.hidden-xs(href='#')
+              i.feather.icon-menu.font-large-1
+          li.nav-item
+            a.navbar-brand(href='../../../html/ltr/vertical-menu-template/index.html')
+              img.brand-logo(alt='stack admin logo' src='/images/limp.png' width=40)
+              h2.brand-text LeampTeam
+          li.nav-item.d-md-none
+            a.nav-link.open-navbar-container(data-toggle='collapse' data-target='#navbar-mobile')
+              i.fa.fa-ellipsis-v
+      .navbar-container.content
+        #navbar-mobile.collapse.navbar-collapse
+          ul.nav.navbar-nav.mr-auto.float-left
+            li.nav-item.d-none.d-md-block
+              a.nav-link.nav-menu-main.menu-toggle.hidden-xs(href='#')
+                i.feather.icon-menu
+            li.nav-item.nav-search
+              a.nav-link.nav-link-search(href='#')
+                i.ficon.feather.icon-search
+              .search-input
+                input.input(type='text' placeholder='Explore Stack...' tabindex='0' data-search='template-search')
+                .search-input-close
+                  i.feather.icon-x
+                ul.search-list
+          ul.nav.navbar-nav.float-right
+            li.dropdown.dropdown-user.nav-item
+              a.dropdown-toggle.nav-link.dropdown-user-link(href='#' data-toggle='dropdown')
+                .avatar.avatar-online
+                  img(src="http://127.0.0.1:3000/admin/users/getImage/"+data.img )
+                  i
+                span.user-name #{data.email}
+              .dropdown-menu.dropdown-menu-right
+                form#imgfor.dropdown-item(action='http://127.0.0.1:3000/admin/users/upload' enctype='multipart/form-data' method='post')
+                  .upload-btn-wrapper
+                    i.feather.icon-camera
+                    button.boton-standar-rw
+                      | Cambiar Imagen
+                    input.upload-file-buton(type='file' name='foto'  )
+                .dropdown-divider
+                a.dropdown-item(href='/admin/users/logout')
+                  i.feather.icon-power
+                  |  Cerrar Sesion
+  // END: Header
+  // BEGIN: Main Menu
+  .main-menu.menu-fixed.menu-light.menu-accordion.menu-shadow(data-scroll-to-active='true')
+    .main-menu-content
+      ul#main-menu-navigation.navigation.navigation-main(data-menu='menu-navigation')
+        //- //- li.navigation-header
+        //- //-   span General
+        //- //-   i.feather.icon-minus(data-toggle='tooltip' data-placement='right' data-original-title='General')
+        li.nav-item
+            a(href='/admin/producto/grilla')
+              i.feather.icon-layers
+              span.menu-title(data-i18n='Productos') Productos
+              //- span.badge.badge.badge-primary.badge-pill.float-right.mr-2 3
+        li.nav-item
+            a(href='/admin/puntera/puntera')
+              i.feather.icon-sun
+              span.menu-title(data-i18n='Productos') Puntera
+              //- span.badge.badge.badge-primary.badge-pill.float-right.mr-2 3
+        li.nav-item
+            a(href='/admin/oferta/oferta')
+              i.feather.icon-zap
+              span.menu-title(data-i18n='Productos') Ofertas
+              //- span.badge.badge.badge-primary.badge-pill.float-right.mr-2 3
+        li.nav-item
+          a(href='/admin/categoria/grilla')
+            i.feather.icon-aperture
+            span.menu-title(data-i18n='Categoria') Categoria
+            //- span.badge.badge.badge-primary.badge-pill.float-right.mr-2 3
+        li.nav-item
+          a(href='#')
+            i.feather.icon-package
+            span.menu-title(data-i18n='Configuracion') Configuracion
+            //- span.badge.badge.badge-primary.badge-pill.float-right.mr-2 3
+          ul.menu-content
+            li
+              a.menu-item(href='/admin/fragancia/grilla' data-i18n='Fragancia') Fragancia
+            li
+              a.menu-item(href='/admin/tamano/grilla' data-i18n='Tamaños') Tamaños
+            li
+              a.menu-item(href='/admin/presentacion/grilla' data-i18n='Presentacion') Presentacion
+  // END: Main Menu
+  // BEGIN: Content
+  .app-content.content
+    .content-overlay
+    .content-wrapper
+      .content-body
+        block content
+  // END: Content
+// BEGIN: Footer
+.sidenav-overlay
+.drag-target
+footer.footer.footer-static.footer-dark.navbar-border
+  p.clearfix.blue-grey.lighten-2.text-sm-center.mb-0.px-2
+    span.float-md-left.d-block.d-md-inline-block
+      | Copyright &copy; 2020 
+      a.text-bold-800.grey.darken-2(href='https://1.envato.market/pixinvent_portfolio' target='_blank') PIXINVENT 
+    span.float-md-right.d-none.d-lg-block
+      | Hand-crafted &amp; Made with 
+      i.feather.icon-heart.pink
+// END: Footer
+// BEGIN: Vendor JS
+  
+script(src='../../../app-assets/vendors/js/vendors.min.js')
+script(src="../../../app-assets/vendors/js/forms/quill/highlight.min.js")
+script(src='../../../app-assets/vendors/js/forms/quill/quill.js')
+script(src='../../../app-assets/vendors/js/forms/quill/katex.min.js')
+script(src='../../../app-assets/vendors/js/forms/select/select2.full.min.js')
+
+
+// BEGIN Vendor JS
+// BEGIN: Page Vendor JS
+script(src='../../../app-assets/vendors/js/tables/datatable/datatables.min.js')
+script(src='../../../app-assets/vendors/js/tables/jquery.dataTables.min.js')
+script(src='../../../app-assets/vendors/js/tables/datatable/dataTables.bootstrap4.min.js')
+script(src='../../../app-assets/vendors/js/forms/toggle/bootstrap-checkbox.min.js')
+script(src='../../../app-assets/vendors/js/forms/toggle/switchery.min.js')
+script(src='../../../app-assets/vendors/js/forms/validation/jqBootstrapValidation.js')
+
+// END: Page Vendor JS
+// BEGIN: Theme JS
+script(src='../../../app-assets/js/core/app-menu.js')
+script(src='../../../app-assets/js/core/app.js')
+
+// END: Theme JS
+// BEGIN: Page JS
+// END: Page JS
+// END: Body

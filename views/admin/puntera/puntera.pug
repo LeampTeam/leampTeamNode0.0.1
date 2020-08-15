@@ -1,0 +1,31 @@
+extends ../../shared/adminlayout
+
+block content
+    .row.match-height
+        .col-xl-12.col-lg-12
+            .card
+                .card-header
+                    h4.card-title Productos Puntera
+                    .heading-elements
+                .card-content
+                    .card-body
+                        .table-responsive
+                            table#recent-orders.table.table-hover.mb-0.ps-container.ps-theme-default
+                                thead
+                                    tr
+                                        th Eliminar
+                                        th Imagen
+                                        th Codigo
+                                        th Nombre
+                                        th Precio
+                                tbody
+                                    each val in productos
+                                        tr
+                                            td.text-truncate 
+                                                a(href='/admin/puntera/sacarDePuntera/'+val.id)
+                                                    i.feather.icon-x
+                                            td.text-truncate
+                                                img(src='http://127.0.0.1:3000/admin/producto/getImageFile/'+val.img width='75' height='75' )
+                                            td.text-truncate #{val.code}
+                                            td.text-truncate #{val.name}
+                                            td.text-truncate $ #{val.price}

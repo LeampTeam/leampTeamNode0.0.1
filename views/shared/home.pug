@@ -1,0 +1,37 @@
+extend loginregisterlayout
+
+block content
+    section.flexbox-container
+        .col-12.d-flex.align-items-center.justify-content-center
+            .col-md-4.col-10.p-0
+                .card-header.bg-transparent.border-0
+                    img(src='/images/limp.png', alt="", width=450 heigth=200)
+                .card-content
+                    .row.py-2
+                        .col-12.col-sm-6.col-md-6.mb-1
+                            a.btn.btn-info.btn-block(href="/admin/users/register")
+                                i.feather.icon-user-plus
+                                |  Register
+                        .col-12.col-sm-6.col-md-6.mb-1
+                            a.btn.btn-primary.btn-block(href="/admin/users/login")
+                                i.feather.icon-log-in
+                                |  Login
+                .card-footer.bg-transparent
+            //-   .row
+            //-     p.text-muted.text-center.col-12.py-1
+            //-       | &copy; 
+            //-       span.year
+            //-       a(href='#') Stack 
+            //-       | Crafted with 
+            //-       i.feather.icon-heart.pink  
+            //-       |  by 
+            //-       a(href='http://themeforest.net/user/pixinvent/portfolio' target='_blank') PIXINVENT
+            //-     .col-12.text-center
+            //-       a.btn.btn-social-icon.mr-1.mb-1.btn-outline-facebook(href='#')
+            //-         span.fa.fa-facebook
+            //-       a.btn.btn-social-icon.mr-1.mb-1.btn-outline-twitter(href='#')
+            //-         span.fa.fa-twitter
+            //-       a.btn.btn-social-icon.mr-1.mb-1.btn-outline-linkedin(href='#')
+            //-         span.fa.fa-linkedin.font-medium-4
+            //-       a.btn.btn-social-icon.mr-1.mb-1.btn-outline-github(href='#')
+            //-         span.fa.fa-github.font-medium-4
