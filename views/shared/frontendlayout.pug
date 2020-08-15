@@ -83,12 +83,12 @@ body
                     .product_search_form.rounded_input
                         form(action='/buscarPorductos' method='post')
                             .input-group
-                                .input-group-prepend
-                                    .custom_select
-                                        select.first_null(name='categoria')
-                                            option(value='') Categoria
-                                            each val,index in cateVista
-                                                option(value=val.id) #{val.name}
+                                //- .input-group-prepend
+                                //-     .custom_select
+                                //-         select.first_null(name='categoria')
+                                //-             option(value='') Categoria
+                                //-             each val,index in cateVista
+                                //-                 option(value=val.id) #{val.name}
                                 input.form-control(placeholder='Buscar Producto...' required='' type='text' name='busqueda')
                                 button.search_btn2(type='submit')
                                     i.fa.fa-search
