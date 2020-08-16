@@ -1,0 +1,58 @@
+    body {
+        margin: 0 50px;
+    }
+    h3{
+        text-align: center;
+    }
+    #cabecera {
+        margin-top: 50px;
+        display: block;
+    }
+
+    #logo {
+        width: 200px;
+        height: 100px;
+        margin: 0 30 px;
+        float: left;
+    }
+
+    #fecha {
+        font-size: 20 px;
+        font-style: oblique;
+        text-align: right;
+
+    }
+
+    #titulo {
+        margin-top: 100px;
+        text-align: center;
+    }
+
+    #datos {
+        margin-top: 20px;
+        display: block;
+        text-align: center;
+    }
+
+
+
+
+table {
+    border-collapse: collapse;
+    width: 70%;
+    margin-left: 15%;
+}
+
+th,td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #ecedf0
+}
+
+th {
+    background-color: #0044ff;
+    color: white;
+}
