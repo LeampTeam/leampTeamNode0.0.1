@@ -98,8 +98,8 @@ body
                                 i.linearicons-bag2
                                 span.cart_count #{verChango.length}
                                 span.amount
-                                    span.currency_symbol $
-                                    | #{total}
+                                    span.currency_symbol 
+                                    | #{total!=0 ? '$' + total : 'Carro Vacio' }
                             .cart_box.cart_right.dropdown-menu.dropdown-menu-right
                                 ul.cart_list
                                     each item, index in verChango 

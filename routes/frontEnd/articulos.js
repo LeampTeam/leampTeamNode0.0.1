@@ -5,7 +5,7 @@ var articulos=require('../../controlador/frontEnd/artiuclos')
 router.get('/',articulos.mainPage );
 router.get('/nuestrosArticulos/:id',articulos.getproductos );
 router.get('/promociones',articulos.getproductosPuntera );
-router.post('/enviarCarroCompra/',articulos.llenarCarroCompra );
+router.get('/enviarCarroCompra/:id',articulos.llenarCarroCompra );
 router.get('/borrarItem/:id',articulos.eliminarItem)
 router.get('/borrarItemCarro/:id',articulos.eliminarItemCarro)
 router.get('/carroCompra',articulos.verCarroCompra)

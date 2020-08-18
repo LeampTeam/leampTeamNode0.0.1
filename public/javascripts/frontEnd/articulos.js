@@ -74,16 +74,16 @@ $( document ).ready(function() {
       });
     })
 
-  //   $(document).on('touchend click','#buttonCompra',function(e){
-  //     e.preventDefault();
-  //     var id=$(this).attr('name')
-  //     var cantidad=$('.qty').val()
-  //     $.post( "/enviarCarroCompra/",{id,cantidad}, function( result ) {
-  //       if(result=="ok"){
-  //         window.location.href='/nuestrosArticulos/1'
-  //       }
-  //     });
-  //   })
+    // $(document).on('touchend click','#buttonCompra',function(e){
+    //   e.preventDefault();
+    //   var id=$(this).attr('name')
+      
+    //   $.post( "/enviarCarroCompra/",{id}, function( result ) {
+    //     if(result=="ok"){
+    //       window.location.href='/nuestrosArticulos/1'
+    //     }
+    //   });
+    // })
   // $(document).on('click','.fa-chevr{on-right',function(){
   //     $(this).removeClass('fa-chevron-right').addClass('fa-chevron-down')
   //  })

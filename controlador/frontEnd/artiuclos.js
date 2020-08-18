@@ -278,7 +278,7 @@ function getproductos(req,res){
                           
                             if(productos[0].checkFragancia){
                                 progroupFrag = productos.reduce((r, a) => {
-                                   if(fragancia!=null){
+                                   if(a.fragancia!=null){
                                    r[a.fragancia.name] = [...r[a.fragancia.name] || [], a];
                                    }
                                    return r;
@@ -286,7 +286,7 @@ function getproductos(req,res){
                            }
                            if(productos[0].checkTamano){
                                progroupTam = productos.reduce((r, a) => {
-                                   if(tamano!=null){
+                                   if(a.tamano!=null){
                                   r[a.tamano.name] = [...r[a.tamano.name] || [], a];
                                    }
                                   return r;
@@ -294,7 +294,7 @@ function getproductos(req,res){
                           }
                           if(productos[0].checkPresentacion){
                            progroupLitr = productos.reduce((r, a) => {
-                               if(presentacion!=null){
+                               if(a.presentacion!=null){
                               r[a.presentacion.name] = [...r[a.presentacion.name] || [], a];
                                }
                               return r;
@@ -433,8 +433,8 @@ function getproductosPuntera(req,res){
 }
 
 function llenarCarroCompra(req,res){
-    let idproducto=req.body.id
-    let cantidad=req.body.cantidad
+    let idproducto=req.params.id
+    
     if(!req.session.productocomprado){
         req.session.productocomprado=[]
     }
@@ -442,14 +442,14 @@ function llenarCarroCompra(req,res){
   
     for(var i=0;i<items.length;i++){
          if(items[i].id==idproducto){
-             req.session.productocomprado[i].cantidad+=cantidad
+             req.session.productocomprado[i].cantidad++
              req.session.productocomprado[i].cantidadXproducto=(req.session.productocomprado[i].cantidad*req.session.productocomprado[i].precio).toFixed(2)
              let total=0
              for(let i=0;i<req.session.productocomprado.length;i++){
                  total+=parseFloat(req.session.productocomprado[i].cantidadXproducto)
              }
              req.session.total=total.toFixed(2)
-             return res.send("ok")
+             return res.redirect('/nuestrosArticulos/1')
             }
     }
     Producto.findById(idproducto,function(err,producto){
@@ -458,8 +458,8 @@ function llenarCarroCompra(req,res){
             descripcion:producto.name,
             id:producto._id,
             img:producto.img,
-            cantidad:cantidad,
-            cantidadXproducto:producto.price*cantidad
+            cantidad:1,
+            cantidadXproducto:producto.price
         }
         
         
@@ -469,7 +469,7 @@ function llenarCarroCompra(req,res){
             total+=parseFloat(req.session.productocomprado[i].cantidadXproducto)
         }
         req.session.total=total.toFixed(2)
-        return res.send("ok")
+        return res.redirect('/nuestrosArticulos/1')
     })
 }
 function eliminarItem(req,res){
