@@ -187,11 +187,44 @@ function getproductos(req,res){
                     
                         
                     }
-                    res.render('frontEnd/articulos',{titulo:'Todos los productos',productosVista,cateVista,
-                    verChango:req.session.productocomprado,total:req.session.total}) 
+                    Producto.find({},
+                        ).populate('fragancia').populate('tamano').populate('presentacion')
+                            .exec((err,productos)=>{
+                                let progroupFrag=null
+                                let progroupTam=null
+                                let progroupLitr=null
+                              
+                                if(productos[0].checkFragancia){
+                                     progroupFrag = productos.reduce((r, a) => {
+                                        if(a.fragancia!=null){
+                                        r[a.fragancia.name] = [...r[a.fragancia.name] || [], a];
+                                        }
+                                        return r;
+                                    }, {});
+                                }
+                                if(productos[0].checkTamano){
+                                    progroupTam = productos.reduce((r, a) => {
+                                        if(a.tamano!=null){
+                                       r[a.tamano.name] = [...r[a.tamano.name] || [], a];
+                                        }
+                                       return r;
+                                   }, {});
+                               }
+                               if(productos[0].checkPresentacion){
+                                progroupLitr = productos.reduce((r, a) => {
+                                    if(a.presentacion!=null){
+                                   r[a.presentacion.name] = [...r[a.presentacion.name] || [], a];
+                                    }
+                                   return r;
+                               }, {});
+                           }
+                    res.render('frontEnd/articulos',{cateid:'',titulo:'Todos los productos',productosVista,cateVista,
+                    verChango:req.session.productocomprado,total:req.session.total,
+                    progroupFrag,progroupTam,progroupLitr}) 
 
                 })
             })
+        })
             
     }else{
         Producto.find({eliminado: { $ne: true },categoria:cateid},
@@ -199,6 +232,7 @@ function getproductos(req,res){
            
                 .exec((err,productos)=>{
                         let cateTitle=productos[0].categoria.name
+                        let cateid=productos[0].categoria.id
                     let productosVista=[]
                     for(let i=0;i<productos.length;i++){
                         let codfrag=productos[i].fragancia!=null?productos[i].fragancia.code:''
@@ -235,11 +269,44 @@ function getproductos(req,res){
                   
                     
                 }
-                    res.render('frontEnd/articulos',{titulo:cateTitle,productosVista,cateVista,
-                        verChango:req.session.productocomprado,total:req.session.total}) 
+                Producto.find({categoria:cateid},
+                    ).populate('fragancia').populate('tamano').populate('presentacion')
+                        .exec((err,productos)=>{
+                            let progroupFrag=null
+                            let progroupTam=null
+                            let progroupLitr=null
+                          
+                            if(productos[0].checkFragancia){
+                                progroupFrag = productos.reduce((r, a) => {
+                                   if(fragancia!=null){
+                                   r[a.fragancia.name] = [...r[a.fragancia.name] || [], a];
+                                   }
+                                   return r;
+                               }, {});
+                           }
+                           if(productos[0].checkTamano){
+                               progroupTam = productos.reduce((r, a) => {
+                                   if(tamano!=null){
+                                  r[a.tamano.name] = [...r[a.tamano.name] || [], a];
+                                   }
+                                  return r;
+                              }, {});
+                          }
+                          if(productos[0].checkPresentacion){
+                           progroupLitr = productos.reduce((r, a) => {
+                               if(presentacion!=null){
+                              r[a.presentacion.name] = [...r[a.presentacion.name] || [], a];
+                               }
+                              return r;
+                          }, {});
+                      }
+                    res.render('frontEnd/articulos',{cateid,titulo:cateTitle,productosVista,cateVista,
+                        verChango:req.session.productocomprado,total:req.session.total,
+                        progroupFrag,progroupTam,progroupLitr}) 
 
                 })
             })
+        })
     }
 }
 function getproductoById(req,res){
@@ -589,66 +656,262 @@ function getProduct(req,res){
                    return res.send(error) 
                 }
                
-               
-                if(productos.length=1){
-                    let codfrag=productos[0].fragancia!=null?productos[0].fragancia.code:''
-                    let codtam=productos[0].tamano!=null?productos[0].tamano.code:''
-                    let codpres=productos[0].presentacion!=null?productos[0].presentacion.code:''
+               let productovista=[]
+               for(let i=0;i<productos.length;i++){
+                    let codfrag=productos[i].fragancia!=null?productos[i].fragancia.code:''
+                    let codtam=productos[i].tamano!=null?productos[i].tamano.code:''
+                    let codpres=productos[i].presentacion!=null?productos[i].presentacion.code:''
                 produ={
-                    id:productos[0].id,
-                    name:productos[0].name,
-                    price:productos[0].price,
-                    code:(productos[0].code+codfrag+codtam+codpres).toString().padStart(10,"0"),
+                    id:productos[i].id,
+                    name:productos[i].name,
+                    price:productos[i].price,
+                    code:(productos[i].code+codfrag+codtam+codpres).toString().padStart(10,"0"),
                     description:productos[0].description,
-                    img:productos[0].img
+                    img:productos[i].img
                 }
-               return res.send(produ)
+                productovista.push(produ)
+               return res.send(productovista)
             }
             }).populate('categoria').populate('fragancia').populate('tamano').populate('presentacion')
+        }else if(busqueda.cate && busqueda.fraga  && busqueda.tama){
+            Producto.find({categoria:busqueda.cate,fragancia:busqueda.fraga,tamano:busqueda.tama},
+                function(error,productos){
+                    if(error){
+                      
+                       return res.send(error) 
+                    }
+                   
+                   let productovista=[]
+                   for(let i=0;i<productos.length;i++){
+                        let codfrag=productos[i].fragancia!=null?productos[i].fragancia.code:''
+                        let codtam=productos[i].tamano!=null?productos[i].tamano.code:''
+                        let codpres=productos[i].presentacion!=null?productos[i].presentacion.code:''
+                    produ={
+                        id:productos[i].id,
+                        name:productos[i].name,
+                        price:productos[i].price,
+                        code:(productos[i].code+codfrag+codtam+codpres).toString().padStart(10,"0"),
+                        description:productos[0].description,
+                        img:productos[i].img
+                    }
+                    productovista.push(produ)
+                   return res.send(productovista)
+                }
+                }).populate('categoria').populate('fragancia').populate('tamano').populate('presentacion')
     }else if(busqueda.cate && busqueda.prese ){
-        Producto.find({categoria:busqueda.cate,fragancia:busqueda.prese},
+        Producto.find({categoria:busqueda.cate,presentacion:busqueda.prese},
             function(error,productos){
                 if(error){
                     console.log(error)
                    return res.send(error) 
                 }
-                let codfrag=productos[0].fragancia!=null?productos[0].fragancia.code:''
-                let codtam=productos[0].tamano!=null?productos[0].tamano.code:''
-                let codpres=productos[0].presentacion!=null?productos[0].presentacion.code:''
-            
-                if(productos.length=1){
+                let productovista=[]
+               for(let i=0;i<productos.length;i++){
+                    let codfrag=productos[i].fragancia!=null?productos[i].fragancia.code:''
+                    let codtam=productos[i].tamano!=null?productos[i].tamano.code:''
+                    let codpres=productos[i].presentacion!=null?productos[i].presentacion.code:''
                 produ={
-                    id:productos[0].id,
-                    name:productos[0].name,
-                    price:productos[0].price,
-                    code:(productos[0].code+codfrag+codtam+codpres).toString().padStart(10,"0"),
+                    id:productos[i].id,
+                    name:productos[i].name,
+                    price:productos[i].price,
+                    code:(productos[i].code+codfrag+codtam+codpres).toString().padStart(10,"0"),
                     description:productos[0].description,
-                    img:productos[0].img
+                    img:productos[i].img
                 }
-               return res.send(produ)
+                productovista.push(produ)
+               return res.send(productovista)
             }
             }).populate('categoria').populate('fragancia').populate('tamano').populate('presentacion')
     }else if(busqueda.cate && busqueda.tama ){
-        Producto.find({categoria:busqueda.cate,presentacion:busqueda.tama},
+        Producto.find({categoria:busqueda.cate,tamano:busqueda.tama},
             function(error,productos){
                 if(error){
                     console.log(error)
                    return res.send(error) 
                 }
-                let codfrag=productos[0].fragancia!=null?productos[0].fragancia.code:''
-                let codtam=productos[0].tamano!=null?productos[0].tamano.code:''
-                let codpres=productos[0].presentacion!=null?productos[0].presentacion.code:''
-              
-                if(productos.length=1){
-                produ={
-                    id:productos[0].id,
-                    name:productos[0].name,
-                    price:productos[0].price,
-                    code:(productos[0].code+codfrag+codtam+codpres).toString().padStart(10,"0"),
-                    description:productos[0].description,
-                    img:productos[0].img
+                let productovista=[]
+                for(let i=0;i<productos.length;i++){
+                     let codfrag=productos[i].fragancia!=null?productos[i].fragancia.code:''
+                     let codtam=productos[i].tamano!=null?productos[i].tamano.code:''
+                     let codpres=productos[i].presentacion!=null?productos[i].presentacion.code:''
+                 produ={
+                     id:productos[i].id,
+                     name:productos[i].name,
+                     price:productos[i].price,
+                     code:(productos[i].code+codfrag+codtam+codpres).toString().padStart(10,"0"),
+                     description:productos[0].description,
+                     img:productos[i].img
+                 }
+                 productovista.push(produ)
+                return res.send(productovista)
+            }
+        }).populate('categoria').populate('fragancia').populate('tamano').populate('presentacion')
+    }else if(busqueda.cate && busqueda.fraga ){
+        Producto.find({categoria:busqueda.cate,fragancia:busqueda.fraga},
+            function(error,productos){
+                if(error){
+                    console.log(error)
+                   return res.send(error) 
                 }
-               return res.send(produ)
+                let productovista=[]
+                for(let i=0;i<productos.length;i++){
+                     let codfrag=productos[i].fragancia!=null?productos[i].fragancia.code:''
+                     let codtam=productos[i].tamano!=null?productos[i].tamano.code:''
+                     let codpres=productos[i].presentacion!=null?productos[i].presentacion.code:''
+                 produ={
+                     id:productos[i].id,
+                     name:productos[i].name,
+                     price:productos[i].price,
+                     code:(productos[i].code+codfrag+codtam+codpres).toString().padStart(10,"0"),
+                     description:productos[0].description,
+                     img:productos[i].img
+                 }
+                 productovista.push(produ)
+                return res.send(productovista)
+            }
+        }).populate('categoria').populate('fragancia').populate('tamano').populate('presentacion')
+    }else if(busqueda.tamano && busqueda.fraga ){
+        Producto.find({tamano:busqueda.tamano,fragancia:busqueda.fraga},
+            function(error,productos){
+                if(error){
+                    console.log(error)
+                   return res.send(error) 
+                }
+                let productovista=[]
+                for(let i=0;i<productos.length;i++){
+                     let codfrag=productos[i].fragancia!=null?productos[i].fragancia.code:''
+                     let codtam=productos[i].tamano!=null?productos[i].tamano.code:''
+                     let codpres=productos[i].presentacion!=null?productos[i].presentacion.code:''
+                 produ={
+                     id:productos[i].id,
+                     name:productos[i].name,
+                     price:productos[i].price,
+                     code:(productos[i].code+codfrag+codtam+codpres).toString().padStart(10,"0"),
+                     description:productos[0].description,
+                     img:productos[i].img
+                 }
+                 productovista.push(produ)
+                return res.send(productovista)
+            }
+        }).populate('categoria').populate('fragancia').populate('tamano').populate('presentacion')
+    }else if(busqueda.prese && busqueda.fraga ){
+        Producto.find({presentacion:busqueda.prese,fragancia:busqueda.fraga},
+            function(error,productos){
+                if(error){
+                    console.log(error)
+                   return res.send(error) 
+                }
+                let productovista=[]
+                for(let i=0;i<productos.length;i++){
+                     let codfrag=productos[i].fragancia!=null?productos[i].fragancia.code:''
+                     let codtam=productos[i].tamano!=null?productos[i].tamano.code:''
+                     let codpres=productos[i].presentacion!=null?productos[i].presentacion.code:''
+                 produ={
+                     id:productos[i].id,
+                     name:productos[i].name,
+                     price:productos[i].price,
+                     code:(productos[i].code+codfrag+codtam+codpres).toString().padStart(10,"0"),
+                     description:productos[0].description,
+                     img:productos[i].img
+                 }
+                 productovista.push(produ)
+                return res.send(productovista)
+            }
+        }).populate('categoria').populate('fragancia').populate('tamano').populate('presentacion')
+    }else if(busqueda.tamano && busqueda.prese ){
+        Producto.find({tamano:busqueda.tamano,presentacion:busqueda.presentacion},
+            function(error,productos){
+                if(error){
+                    console.log(error)
+                   return res.send(error) 
+                }
+                let productovista=[]
+                for(let i=0;i<productos.length;i++){
+                     let codfrag=productos[i].fragancia!=null?productos[i].fragancia.code:''
+                     let codtam=productos[i].tamano!=null?productos[i].tamano.code:''
+                     let codpres=productos[i].presentacion!=null?productos[i].presentacion.code:''
+                 produ={
+                     id:productos[i].id,
+                     name:productos[i].name,
+                     price:productos[i].price,
+                     code:(productos[i].code+codfrag+codtam+codpres).toString().padStart(10,"0"),
+                     description:productos[0].description,
+                     img:productos[i].img
+                 }
+                 productovista.push(produ)
+                return res.send(productovista)
+            }
+        }).populate('categoria').populate('fragancia').populate('tamano').populate('presentacion')
+    }else if( busqueda.fraga ){
+        Producto.find({fragancia:busqueda.fraga},
+            function(error,productos){
+                if(error){
+                    console.log(error)
+                   return res.send(error) 
+                }
+                let productovista=[]
+                for(let i=0;i<productos.length;i++){
+                     let codfrag=productos[i].fragancia!=null?productos[i].fragancia.code:''
+                     let codtam=productos[i].tamano!=null?productos[i].tamano.code:''
+                     let codpres=productos[i].presentacion!=null?productos[i].presentacion.code:''
+                 produ={
+                     id:productos[i].id,
+                     name:productos[i].name,
+                     price:productos[i].price,
+                     code:(productos[i].code+codfrag+codtam+codpres).toString().padStart(10,"0"),
+                     description:productos[0].description,
+                     img:productos[i].img
+                 }
+                 productovista.push(produ)
+                return res.send(productovista)
+            }
+        }).populate('categoria').populate('fragancia').populate('tamano').populate('presentacion')
+    }else if( busqueda.prese ){
+        Producto.find({presentacion:busqueda.prese},
+            function(error,productos){
+                if(error){
+                    console.log(error)
+                   return res.send(error) 
+                }
+                let productovista=[]
+                for(let i=0;i<productos.length;i++){
+                     let codfrag=productos[i].fragancia!=null?productos[i].fragancia.code:''
+                     let codtam=productos[i].tamano!=null?productos[i].tamano.code:''
+                     let codpres=productos[i].presentacion!=null?productos[i].presentacion.code:''
+                 produ={
+                     id:productos[i].id,
+                     name:productos[i].name,
+                     price:productos[i].price,
+                     code:(productos[i].code+codfrag+codtam+codpres).toString().padStart(10,"0"),
+                     description:productos[0].description,
+                     img:productos[i].img
+                 }
+                 productovista.push(produ)
+                return res.send(productovista)
+            }
+        }).populate('categoria').populate('fragancia').populate('tamano').populate('presentacion')
+    }else if( busqueda.tama ){
+        Producto.find({tamano:busqueda.tama},
+            function(error,productos){
+                if(error){
+                    console.log(error)
+                   return res.send(error) 
+                }
+                let productovista=[]
+                for(let i=0;i<productos.length;i++){
+                     let codfrag=productos[i].fragancia!=null?productos[i].fragancia.code:''
+                     let codtam=productos[i].tamano!=null?productos[i].tamano.code:''
+                     let codpres=productos[i].presentacion!=null?productos[i].presentacion.code:''
+                 produ={
+                     id:productos[i].id,
+                     name:productos[i].name,
+                     price:productos[i].price,
+                     code:(productos[i].code+codfrag+codtam+codpres).toString().padStart(10,"0"),
+                     description:productos[0].description,
+                     img:productos[i].img
+                 }
+                 productovista.push(produ)
+                return res.send(productovista)
             }
         }).populate('categoria').populate('fragancia').populate('tamano').populate('presentacion')
     }

@@ -29,6 +29,7 @@ function productos(req,res){
    
     Producto.find({eliminado: { $ne: true }, $or: [{name: new RegExp(search,"i")},{code: new RegExp(search,"i")}]},
     '_id price code stock categoria.name img estaEnPuntera estaEnOferta')
+        .sort({ CreateAt: 'desc' })
         .populate('categoria')
         .exec((err,producto)=>{
             

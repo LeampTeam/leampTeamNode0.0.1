@@ -2,8 +2,10 @@
 
 $( document ).ready(function() {
 
-  $('.select').change(function(){
 
+  
+  $('.select').change(function(){
+    // $('#filtro').submit()
   let cate=$('#categoria').val()
   let fraga='';
   let tama='';
@@ -18,34 +20,70 @@ $( document ).ready(function() {
     if( $("#presentacion")){
       prese=$("#presentacion option:selected").val()
     }
-    
+    $('#listaProdu').empty()
   
     $.post( "/obtenerProducto/",{fraga,tama,prese,cate}, function( result ) {
-            console.log(result)
-            $('.product_title').html('')
-            $('.product_title').html(result.name)
-            $('.price').html('')
-            $('.price').html(result.price)
-            $('.code').html('')
-            $('.code').html(result.code)
-            $('.descrip').html('')
-            $('.descrip').html(result.description)
-            $('.product_img_box').empty()
-            $('.product_img_box').html('<img src="/admin/producto/getImageFile/'+result.img+'"  height="400" alt="product_img1">')
-            $('#buttonCompra').attr('name',result.id)
+      let html=''
+      for(let i=0;i<result.length;i++){
+         html+='<div class="product animate__animated animate__fadeIn">'
+         +'<div class="product_img"><a href="/enviarCarroCompra/'+result[i].id+'"><img src="/admin/producto/getImageFile/'+result[i].img+'"></a>'
+             +'<div class="product_action_box">'
+                 +'<ul class="list_none pr_action_btn">'
+                     +'<li class="add-to-cart"><a href="/enviarCarroCompra/'+result[i].id+'"><i class="icon-basket-loaded"></i> Agregar</a></li>'
+                + '</ul>'
+            +'</div>'
+        + '</div>'
+         +'<div class="product_info">'
+             +'<h6 class="product_title"><a href="">'+result[i].name+' </a></h6>'
+             +'<div class="product_price"><span class="price">$'+result[i].price+'</span></div>'
+             +'<div class="rating_wrap">'
+                 +'<div class="rating">'
+                    +' <div class="product_rate" style="width:80%"></div>'
+                + '</div><span class="rating_num">(21)</span></div>'
+            + '<div class="pr_desc">'
+                + '<p> '+result[i].description+'</p>'
+            + '</div>'
+            + '<ul class="product-meta">'
+                + '<li>Codigo: <a class="code" href="#">'+result[i].code+'</a></li>'
+                + '<li>Categoria: <a href="#">'+result[i].categoria+'</a></li>'
+            + '</ul>'
+            + '<div class="list_product_action_box">'
+                 +'<ul class="list_none pr_action_btn">'
+                    +' <li class="add-to-cart"><a href="/enviarCarroCompra/'+result[i].id+'"><i class="icon-basket-loaded"></i> Agregar</a></li>'
+                +' </ul>'
+             +'</div>'
+        + '</div>'
+     +'</div>'
+
+
+
+      }
+      $('#listaProdu').append(html)
+            // console.log(result)
+            // $('.product_title').html('')
+            // $('.product_title').html(result.name)
+            // $('.price').html('')
+            // $('.price').html(result.price)
+            // $('.code').html('')
+            // $('.code').html(result.code)
+            // $('.descrip').html('')
+            // $('.descrip').html(result.description)
+            // $('.product_img_box').empty()
+            // $('.product_img_box').html('<img src="/admin/producto/getImageFile/'+result.img+'"  height="400" alt="product_img1">')
+            // $('#buttonCompra').attr('name',result.id)
       });
     })
 
-    $(document).on('touchend click','#buttonCompra',function(e){
-      e.preventDefault();
-      var id=$(this).attr('name')
-      var cantidad=$('.qty').val()
-      $.post( "/enviarCarroCompra/",{id,cantidad}, function( result ) {
-        if(result=="ok"){
-          window.location.href='/nuestrosArticulos/1'
-        }
-      });
-    })
+  //   $(document).on('touchend click','#buttonCompra',function(e){
+  //     e.preventDefault();
+  //     var id=$(this).attr('name')
+  //     var cantidad=$('.qty').val()
+  //     $.post( "/enviarCarroCompra/",{id,cantidad}, function( result ) {
+  //       if(result=="ok"){
+  //         window.location.href='/nuestrosArticulos/1'
+  //       }
+  //     });
+  //   })
   // $(document).on('click','.fa-chevr{on-right',function(){
   //     $(this).removeClass('fa-chevron-right').addClass('fa-chevron-down')
   //  })

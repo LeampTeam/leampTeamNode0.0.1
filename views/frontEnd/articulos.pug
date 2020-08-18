@@ -12,8 +12,48 @@ block content
         .container
             .row.align-items-center
                 .col-lg-9.offset-lg-3
-                    .row.shop_container.list
-                        .col-md-12
+                    .row.align-items-center.mb-4.pb-1
+                        .col-12
+                            .product_header
+                                .product_header_left
+                                    //- .custom_select
+                                    //-     select.form-control.form-control-sm
+                                    //-         option(value='order') Default sorting
+                                    //-         option(value='popularity') Sort by popularity
+                                    //-         option(value='date') Sort by newness
+                                    //-         option(value='price') Sort by price: low to high
+                                    //-         option(value='price-desc') Sort by price: high to low
+                                .product_header_right
+                                    h3 Filtros
+                                    //- .products_view
+                                    //-     a.shorting_icon.grid.active(href='javascript:Void(0);')
+                                    //-         i.ti-view-grid
+                                    //-     a.shorting_icon.list(href='javascript:Void(0);')
+                                    //-         i.ti-layout-list-thumb
+                                    form#filtro(action="/obtenerProducto", method="post")
+                                        if progroupFrag
+                                            label(for='fragancia') Fragancia
+                                                select.select.form-control.form-control-sm(id='fragancia' name='fraga')
+                                                    option(value='') Seleccione Fragancia
+                                                    each frag in progroupFrag
+                                                        option(value=frag[0].fragancia.id ) #{frag[0].fragancia.name}
+                                                            a(href='') 
+                                                            
+                                        if progroupTam
+                                            label(for='tamano') Tamaño
+                                                select.select.form-control.form-control-sm(id='tamano' name='tama')
+                                                    option(value='') Seleccion
+                                                    each tama in progroupTam
+                                                        option(value=tama[0].tamano.id ) #{tama[0].tamano.name}
+                                        if progroupLitr
+                                            label(for='presentacion') Presentacion
+                                                select.select.form-control.form-control-sm(id='presentacion' name='prese')
+                                                    option(value='') Seleccione Presentacion
+                                                    each prese in progroupLitr
+                                                        option(value=prese[0].presentacion.id) #{prese[0].presentacion.name}
+                    input(type="hidden" id="categoria" name="categoria" value=cateid)
+                    .row.shop_container.list.animate__animated.animate__fadeIn
+                        .col-md-12#listaProdu
                             each val in productosVista
                                 .product
                                     .product_img
@@ -49,7 +89,7 @@ block content
                                         .list_product_action_box
                                             ul.list_none.pr_action_btn
                                                 li.add-to-cart
-                                                    a(href=href='/detalleProducto/'+val.id)
+                                                    a(href='/detalleProducto/'+val.id)
                                                         i.icon-basket-loaded
                                                         |  Agregar
                     //- .row
@@ -64,3 +104,4 @@ block content
                     //-             li.page-item
                     //-                 a.page-link(href='#')
                     //-                     i.linearicons-arrow-right
+    script(src="/javascripts/frontEnd/articulos.js")
