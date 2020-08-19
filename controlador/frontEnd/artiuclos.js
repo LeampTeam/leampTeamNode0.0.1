@@ -987,8 +987,34 @@ function getProduct(req,res){
                        cateVista.push(cate)
                       
                     }
+                    let progroupFrag=null
+                    let progroupTam=null
+                    let progroupLitr=null
+                  
+                    if(productos[0].checkFragancia){
+                         progroupFrag = productos.reduce((r, a) => {
+        
+                            r[a.fragancia.name] = [...r[a.fragancia.name] || [], a];
+                            return r;
+                        }, {});
+                    }
+                    if(productos[0].checkTamano){
+                        progroupTam = productos.reduce((r, a) => {
+       
+                           r[a.tamano.name] = [...r[a.tamano.name] || [], a];
+                           return r;
+                       }, {});
+                   }
+                   if(productos[0].checkPresentacion){
+                    progroupLitr = productos.reduce((r, a) => {
+   
+                       r[a.presentacion.name] = [...r[a.presentacion.name] || [], a];
+                       return r;
+                   }, {});
+               }
             res.render('frontEnd/articulos',{productosVista,cateVista,
-                verChango:req.session.productocomprado,total:req.session.total}) 
+                verChango:req.session.productocomprado,total:req.session.total,
+                progroupFrag,progroupTam,progroupLitr}) 
             })
         }
         }).populate('categoria').populate('fragancia').populate('tamano').populate('presentacion')
