@@ -5,6 +5,9 @@ $( document ).ready(function() {
 
   
   $('.select').change(function(){
+    $('.preloader').css('display','block')
+    $('.preloader').removeClass('loaded')
+    $("body").css("opacity","0");
     // $('#filtro').submit()
   let cate=$('#categoria').val()
   let fraga='';
@@ -59,6 +62,11 @@ $( document ).ready(function() {
 
       }
       $('#listaProdu').append(html)
+      $('.preloader').css('display','none')
+      $('.preloader').addClass('loaded')
+    
+        $("body").animate({opacity:1},500);
+     
             // console.log(result)
             // $('.product_title').html('')
             // $('.product_title').html(result.name)
