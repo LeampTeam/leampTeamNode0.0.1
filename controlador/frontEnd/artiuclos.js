@@ -929,7 +929,7 @@ function getProduct(req,res){
                 total+=parseFloat(req.session.productocomprado[i].cantidadXproducto)
             }
             req.session.total=total.toFixed(2)
-        Producto.find({categoria:params.categoria, $or: [{name: new RegExp(params.busqueda,"i")},{descripcion: new RegExp(params.busqueda,"i")}],eliminado: { $ne: true }},function(error,productos){
+        Producto.find({$or: [{name: new RegExp(params.busqueda,"i")},{descripcion: new RegExp(params.busqueda,"i")}],eliminado: { $ne: true }},function(error,productos){
             if(productos.length==0){
                 Categoria.find({eliminado:{ $ne: true }})
                 
