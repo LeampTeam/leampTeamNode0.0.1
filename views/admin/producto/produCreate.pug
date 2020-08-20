@@ -98,7 +98,7 @@ block content
                                         .input-group.mt-0
                                             .input-group-prepend
                                                 span.input-group-text $
-                                            input.form-control#numeroIngresado(type='number' placeholder='Precio Bruto' aria-label='Amount (to the nearest dollar)' required data-validation-required-message="Este campo es requerido" name='priceMayor' value= producto!=''?producto.priceMayor:'')
+                                            input.form-control#numeroIngresado(type='text' placeholder='Precio Bruto' aria-label='Amount (to the nearest dollar)' required data-validation-required-message="Este campo es requerido" name='priceMayor' value= producto!=''?producto.priceMayor:'')
                                             .input-group-append
                                                 span.input-group-text .00
                             .col-md-3
@@ -108,7 +108,7 @@ block content
                                         .input-group.mt-0
                                             .input-group-prepend
                                                 span.input-group-text %
-                                            input.form-control#numCalcular(type='number' placeholder='Porcentaje' aria-label='Amount (to the nearest dollar)' required data-validation-required-message="Este campo es requerido" name='porcentaje' value= producto!=''?producto.porcentaje:'')
+                                            input.form-control#numCalcular(type='text' placeholder='Porcentaje' aria-label='Amount (to the nearest dollar)' required data-validation-required-message="Este campo es requerido" name='porcentaje' value= producto!=''?producto.porcentaje:'')
                             .col-md-3
                                 .form-group
                                     .controls
@@ -116,7 +116,7 @@ block content
                                         .input-group.mt-0
                                             .input-group-prepend
                                                 span.input-group-text $
-                                            input.form-control#numeroTotal(type='number' placeholder='Precio de Lista' disabled aria-label='Amount (to the nearest dollar)'  name='price' value= producto!=''?producto.price:'')
+                                            input.form-control#numeroTotal(type='text' placeholder='Precio de Lista' disabled aria-label='Amount (to the nearest dollar)'  name='price' value= producto!=''?producto.price:'')
                                             .input-group-append
                                                 span.input-group-text .00
                         
