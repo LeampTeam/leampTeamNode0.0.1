@@ -1,0 +1,62 @@
+html{
+	margin: 0;
+	padding: 0;
+}
+
+	#cuerpo {
+		margin: 0;
+		padding: 0;
+		width: 210mm;
+		height: 297mm;
+
+	}
+
+	#logo {
+		display: block;
+		margin: auto;
+		margin-top:-30px;
+		width: 50%;
+
+	}
+
+	#fecha {
+		width: 90%;
+		left: 600px;
+		top: 20px;
+		position: relative;
+
+	}
+
+	#encabezado {
+		font-size: x-small;
+
+
+	}
+
+ 	#tablas {
+		display: block;
+
+	}
+
+	#contenedorListaPrecios {
+		display: block;
+	}
+
+
+	#listaPrecios {
+		width: 85%;
+		margin:auto;
+	}
+
+	#estiloListaPrecios {
+		font-size: 10px;
+	}
+
+	#nombreCategoria {
+		margin-top: 40px;
+		font-size: 18px;
+	}
+
+	.tamanoEncabezadoLista {
+		font-size: 12px;
+	}

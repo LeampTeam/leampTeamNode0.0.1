@@ -17,5 +17,6 @@ router.post('/getProducto',producto.getProduct);
 router.get('/delete/:id',producto.borrarProducto);
 router.post('/upload',md_upload,producto.uploadImage );
 router.get('/getImageFile/:img',producto.getImageFile );
+router.get('/crearListaDePrecios', check.checkSignIn, producto.crearListaDePrecios);
 
 module.exports = router;
