@@ -490,7 +490,37 @@ function tablaDePrecio(productos) {
             filas += tablaDetergenteJabonLiquidoSuavizanteCLoroLavandina(productos, progrouppresentacion, a)
         } else if (a == 'Desengrasantes') {
             filas += tablaQuitaManchasDesengrasantes(productos, a)
-        }
+        } else if (a == 'Limpiavidrios') {
+            filas += tablaQuitaManchasDesengrasantes(productos, a)
+        } else if (a == 'Cera concentrada Autobrillo') {
+            filas += tablaQuitaManchasDesengrasantes(productos, a)
+        } else if (a == 'Jabón Liquido para Manos') {
+            filas += tablaQuitaManchasDesengrasantes(productos, a)
+        } else if (a == 'Jabón en Polvo y en Pan') {
+            filas += tablaQuitaManchasDesengrasantes(productos, a)
+        } else if (a == 'Desodorantes concentrado p/ piso antibacterial') {
+            filas += tablaQuitaManchasDesengrasantes(productos, a)
+        } else if (a == 'Desinfectantes e insectisidas') {
+            filas += tablaQuitaManchasDesengrasantes(productos, a)
+        } else if (a == 'Automotor') {
+            filas += tablaQuitaManchasDesengrasantes(productos, a)
+        } else if (a == 'Artículos para pileta') {
+            filas += tablaQuitaManchasDesengrasantes(productos, a)
+        } else if (a == 'Aerosoles') {
+            filas += tablaQuitaManchasDesengrasantes(productos, a)
+        } else if (a == 'Difusor Aromático con Varillas') {
+            filas += tablaQuitaManchasDesengrasantes(productos, a)
+        } else if (a == 'Equipos y Combos') {
+            filas += tablaQuitaManchasDesengrasantes(productos, a)
+        } else if (a == 'Aromatizador para Auto') {
+            filas += tablaQuitaManchasDesengrasantes(productos, a)
+        } else if (a == 'Perfuminas al Alcohol. ( Hogar/ Ambiente/ Auto)') {
+            filas += tablaQuitaManchasDesengrasantes(productos, a)
+        } else if (a == 'Papelería') {
+            filas += tablaQuitaManchasDesengrasantes(productos, a)
+        } else if (a == 'Bolsas') {
+            filas += tablaQuitaManchasDesengrasantes(productos, a)
+        } 
     }
     return filas;
 }
